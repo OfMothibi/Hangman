@@ -1,0 +1,20 @@
+word_list = [
+    'whale',
+    'car',
+    'social',
+    'king',
+    'crust',
+    'zebra',
+    'queen',
+    'sheen',
+    'bring',
+    'bright',
+    'joker',
+    'colleges',
+    'practice',
+    'theory',
+    'lies',
+    'career',
+    'work',
+    'write'
+]
