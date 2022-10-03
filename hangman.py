@@ -140,7 +140,7 @@ def play(word):
             print("Invalid guess")
         print(display_hangman(tries))
         print(word_completion)
-        print("\n")
+        print("\nYou have tried the following letters and words:\n->",str(guessed_words),"\n->",str(guessed_letters),"\n")
     if guessed:
         print(display_hangman(0))
         print(word,"\nCongratulations, you guessed the correct word! You win! Your enemies weep knowing that your prowess in guessing is unmatched")
