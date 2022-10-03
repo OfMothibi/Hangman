@@ -4,6 +4,7 @@ import random
 from words import word_list
 
 def display_hangman(tries):
+    
     stages = [""" 
                        
                      |_0_|
@@ -84,6 +85,14 @@ def get_word():
     return word.upper()
 
 def play(word):
+    """_summary_
+
+    Args:
+        word (_type_): _description_
+
+    Variables:
+        word_completion (String): dshvdsukvhg
+    """
     word_completion = '_'*len(word)
     guessed = False
     guessed_letters = []
@@ -141,18 +150,13 @@ def home_screen():
     elif ans=='2':
         add_text()
     else:
-        word = get_word()
-        play(word)
-        while input("Play again? (Y/N)").upper() == "Y":
-            word=get_word()
-            play(word)
+        start_game()
 
 def rules():
     print("1.You have six attempts to guess the hidden word\n2.You can guess either a single letter or the whole word")
     ans = input("Are you ready to play? (Y) or any other key to quit").upper()
     if ans == 'Y':
-        word=get_word()
-        play(word)
+        start_game()
     else:
         home_screen()
 
@@ -171,6 +175,13 @@ def add_text():
             break
         else:
             continue
+
+def start_game():
+    word = get_word()
+    play(word)
+    while input("Play again? (Y/N)").upper() == "Y":
+        word=get_word()
+        play(word)
 
 def main():
     home_screen()

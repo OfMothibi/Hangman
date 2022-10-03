@@ -14,3 +14,4 @@ okay
 wrong
 splendid
 super
+run
