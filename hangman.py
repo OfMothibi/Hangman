@@ -1,6 +1,7 @@
 from curses.ascii import isalpha
 from pickle import FALSE
 import random
+import string
 from words import word_list
 
 def display_hangman(tries):
@@ -88,10 +89,14 @@ def play(word):
     """_summary_
 
     Args:
-        word (_type_): _description_
+        word (String): a random word for the user to guess
 
     Variables:
-        word_completion (String): dshvdsukvhg
+        word_completion (String): space for the user to see their progress with guesses
+        guessed (boolean): indicates whether the user has finished guessing
+        guessed_letters (list): a list of the letters entered by the user
+        guessed_words (list): a list of the words the user has entered
+        tries (int): the number of guesses the user can attempt
     """
     word_completion = '_'*len(word)
     guessed = False
