@@ -4,8 +4,7 @@ import random
 import string
 from words import word_list
 
-def display_hangman(tries):
-    
+def display_hangman(tries):    
     stages = [""" 
                        
                      |_0_|
@@ -72,6 +71,11 @@ def display_hangman(tries):
     return(stages[tries])
 
 def get_text_word():
+    """function to randomly select a word from a txt document
+
+    Returns:
+        string: word for user to guess
+    """
     file = open("words.txt")
     words = file.readlines()
     index = random.randrange(0,len(words))
@@ -79,6 +83,11 @@ def get_text_word():
     return word
 
 def get_word():
+    """function to get a word from a python list
+
+    Returns:
+        string: word for user to guess
+    """
     if input("Pick a source for the words.\n\tText file(T)\n\t  or\n\tPython List(P)\n").upper()=="T":
         word=get_text_word().strip()
     else:
@@ -86,6 +95,16 @@ def get_word():
     return word.upper()
 
 def is_letter(word,guess,word_completion:string,guessed,guessed_letters:list,tries):
+    """Takes letter guesses and returns values depending on whether they are right, wrong, or previously entered
+
+    Args:
+        word (string): the word that the user is attempting to guess
+        guess (string): user input that must be a letter
+        word_completion (string): displays the progress that the user has made with their guesses
+        guessed (boolean): used to determine whether the guess is correct
+        guessed_letters (list): previously entered letter guesses 
+        tries (int): index for list of hangman figures
+    """
     return_list=[]
     if guess in guessed_letters:
         print("You already guessed this letter. Please guess again")
@@ -110,6 +129,19 @@ def is_letter(word,guess,word_completion:string,guessed,guessed_letters:list,tri
     return(return_list)
 
 def is_word(word,guess,guessed,guessed_words:list,tries):
+    """Takes word guesses and returns values depending on whether they are right, wrong, or previously entered
+
+    Args:
+        word (string): the word that the user is attempting to guess
+        guess (string): user input that must be a word
+        word_completion (string): displays the progress that the user has made with their guesses
+        guessed (boolean): used to determine whether the guess is correct
+        guessed_words (list): previously entered word guesses 
+        tries (int): index for list of hangman figures
+
+    Returns:
+        list: returns values used in the game screen
+    """
     return_list=[]
     if guess == word:
         guessed=True
@@ -125,7 +157,15 @@ def is_word(word,guess,guessed,guessed_words:list,tries):
     return_list.append(tries)
     return return_list
 
-def game_play(tries,word_completion,guessed_words,guessed_letters):
+def game_screen(tries,word_completion,guessed_words,guessed_letters):
+    """Display the hangman figure, progress of the guess and lists of previously entered guesses
+
+    Args:
+        tries (int): indictes the index of the list of hangman figures
+        word_completion (string): displays the progress of the guess
+        guessed_words (list): the valid guess words the user has previously entered
+        guessed_letters (list): the valid guess letters the user has previously entered
+    """
     print(display_hangman(tries))
     print(word_completion)
     print("\nYou have tried the following letters and words:\n->",str(guessed_words),"\n->",str(guessed_letters),"\n")
@@ -167,7 +207,7 @@ def play(word):
             tries=results[2]
         else:
             print("Invalid guess")
-        game_play(tries,word_completion,guessed_words,guessed_letters)
+        game_screen(tries,word_completion,guessed_words,guessed_letters)
     if guessed:
         print(display_hangman(0))
         print(word,"\nCongratulations, you guessed the correct word! You win! Your enemies weep knowing that your prowess in guessing is unmatched")
@@ -175,6 +215,8 @@ def play(word):
         print("Sorry you ran out of tries. Your enemies laugh at your failing and cheer on your downfall.")
 
 def home_screen():
+    """Main menu prividing options for users
+    """
     print("Welcome to Hangman:\n")
     ans=input("\n\tPress (1) to see the rules.\n\tPress (2) to add words to the text file.\n\tPress (any) to play\n\t")
     if ans=="1":
@@ -185,6 +227,8 @@ def home_screen():
         start_game()
 
 def rules():
+    """Displays the game rules
+    """
     print("1.You have six attempts to guess the hidden word\n2.You can guess either a single letter or the whole word")
     ans = input("Are you ready to play? (Y) or any other key to quit").upper()
     if ans == 'Y':
@@ -193,6 +237,8 @@ def rules():
         home_screen()
 
 def add_text():
+    """Adds words to a txt doc
+    """
     file = open("words.txt",'a')
     writing = True
     while writing:
@@ -209,6 +255,8 @@ def add_text():
             continue
 
 def start_game():
+    """Function to initiate the game and keep it running
+    """
     word = get_word()
     play(word)
     while input("Play again? (Y/N)").upper() == "Y":
