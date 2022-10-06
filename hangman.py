@@ -13,7 +13,8 @@ def display_hangman(tries):
                   
                   
                   """,
-                  """_______
+                  """
+                  _______
                   |     |
                   |     0
                   |    /|\\
@@ -113,7 +114,7 @@ def is_letter(word,guess,word_completion:string,guessed,guessed_letters:list,tri
         guessed_letters.append(guess)
         tries-=1
     else:
-        print("Yes, ", guess," is in the word!")
+        print("Yes, {guess} is in the word!")
         guessed_letters.append(guess)
         word_as_list=list(word_completion)
         indices = [i for i, letter in enumerate(word) if letter == guess]
@@ -168,7 +169,7 @@ def game_screen(tries,word_completion,guessed_words,guessed_letters):
     """
     print(display_hangman(tries))
     print(word_completion)
-    print("\nYou have tried the following letters and words:\n->",str(guessed_words),"\n->",str(guessed_letters),"\n")
+    print("\nYou have tried the following letters and words:\n->{guessed_words}\n-> {guessed_letters}\n")
 
 def play(word):
     """_summary_
