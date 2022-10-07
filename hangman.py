@@ -110,11 +110,11 @@ def is_letter(word,guess,word_completion:string,guessed,guessed_letters:list,tri
     if guess in guessed_letters:
         print("You already guessed this letter. Please guess again")
     elif guess not in word:
-        print(guess+" is not in the word.")
+        print(f"{guess} is not in the word.")
         guessed_letters.append(guess)
         tries-=1
     else:
-        print("Yes, {guess} is in the word!")
+        print(f"Yes, {guess} is in the word!")
         guessed_letters.append(guess)
         word_as_list=list(word_completion)
         indices = [i for i, letter in enumerate(word) if letter == guess]
@@ -150,7 +150,7 @@ def is_word(word,guess,guessed,guessed_words:list,tries):
         print("You already guessed ",guess)
         tries -=1
     else:
-        print(guess, " is incorrect.")
+        print(f"{guess} is incorrect.")
         guessed_words.append(guess)
         tries-=1
     return_list.append(guessed)
@@ -158,7 +158,7 @@ def is_word(word,guess,guessed,guessed_words:list,tries):
     return_list.append(tries)
     return return_list
 
-def game_screen(tries,word_completion,guessed_words,guessed_letters):
+def game_screen(tries,word_completion,guessed_words:list,guessed_letters:list):
     """Display the hangman figure, progress of the guess and lists of previously entered guesses
 
     Args:
@@ -167,9 +167,7 @@ def game_screen(tries,word_completion,guessed_words,guessed_letters):
         guessed_words (list): the valid guess words the user has previously entered
         guessed_letters (list): the valid guess letters the user has previously entered
     """
-    print(display_hangman(tries))
-    print(word_completion)
-    print("\nYou have tried the following letters and words:\n->{guessed_words}\n-> {guessed_letters}\n")
+    print(f"{display_hangman(tries)}\n{word_completion}\nYou have tried the following letters and words:\n-> {guessed_words} \n-> {guessed_letters}\n")
 
 def play(word):
     """_summary_
@@ -189,10 +187,7 @@ def play(word):
     guessed_letters = []
     guessed_words=[]
     tries=7
-    print("Let's play HANGMAN!")
-    print(display_hangman(tries))
-    print(word_completion)
-    print("\n")
+    print(f"Let's play HANGMAN!\n {display_hangman(tries)}\n{word_completion}\n")
     while not guessed and tries >1:
         guess = input("Please guess a word or letter: ").upper()
         if len(guess) == 1 and guess.isalpha():
@@ -210,10 +205,9 @@ def play(word):
             print("Invalid guess")
         game_screen(tries,word_completion,guessed_words,guessed_letters)
     if guessed:
-        print(display_hangman(0))
-        print(word,"\nCongratulations, you guessed the correct word! You win! Your enemies weep knowing that your prowess in guessing is unmatched")
+        print(f"{display_hangman(0)}\n{word}\nCongratulations, you guessed the correct word! You win! Your enemies weep knowing that your prowess in guessing is unmatched")
     else:
-        print("Sorry you ran out of tries. Your enemies laugh at your failing and cheer on your downfall.")
+        print(f"The word was {word}\nSorry you ran out of tries. Your enemies laugh at your failing and cheer on your downfall.")
 
 def home_screen():
     """Main menu prividing options for users
