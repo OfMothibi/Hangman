@@ -1,7 +1,7 @@
 from curses.ascii import isalpha
-from pickle import FALSE
 import random
 import string
+import os
 from words import word_list
 
 def display_hangman(tries):    
@@ -167,6 +167,7 @@ def game_screen(tries,word_completion,guessed_words:list,guessed_letters:list):
         guessed_words (list): the valid guess words the user has previously entered
         guessed_letters (list): the valid guess letters the user has previously entered
     """
+    os.system('clear')
     print(f"{display_hangman(tries)}\n{word_completion}\nYou have tried the following letters and words:\n-> {guessed_words} \n-> {guessed_letters}\n")
 
 def play(word):
@@ -255,6 +256,7 @@ def start_game():
     word = get_word()
     play(word)
     while input("Play again? (Y/N)").upper() == "Y":
+        os.system('clear')
         word=get_word()
         play(word)
 

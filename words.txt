@@ -15,3 +15,6 @@ wrong
 splendid
 super
 run
+man
+silence
+respect
